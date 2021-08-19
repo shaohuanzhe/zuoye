@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 200px;
+            clear: all;
+            margin: 0;
+            padding: 0px;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin: 0;
+        }
+
+        #customers tr:hover {
+            background-color: rgb(61, 247, 107);
+        }
+
+        #customers2 {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 600px;
+            margin: 0;
+            height: 381px;
+            padding: 0px;
+        }
+
+        #customers2 td,
+        #customers2 th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin: 0;
+        }
+
+        #customers2 tr:hover {
+            background-color: rgb(200, 93, 241);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div style="display: inline-block;">
+            <table id="customers">
+                <tbody>
+                    <tr v-for="(site,index) in sites" >
+                        <td @click="test(site,index)"> {{ site.name }}</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div><div style="display: inline-block;">
+            <table id="customers2">
+                <tr>
+                    <td>当前选择菜单:{{message}}<br>第三个菜单选中时改变样式<br>大于5的菜单显示内容：{{ message2 }}</td>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                message2: '',
+                sites: [],
+            },
+            created() {
+                for (var i = 1; i <= 10; i++) {
+
+                    this.sites.push({ name: '菜单' + i })
+                }
+                console.log("sites", this.sites)
+            },
+
+            methods: {
+                test(site,inc) {
+
+                    this.message=site.name; 
+
+                   if(inc>3){
+                    this.message2=inc+1;
+                   }else{
+                    this.message2='';
+                   }
+    
+                }
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>
